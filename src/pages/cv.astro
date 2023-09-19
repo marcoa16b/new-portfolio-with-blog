@@ -1,0 +1,254 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TimeLineElement from "../components/cv/TimeLine.astro";
+---
+
+<BaseLayout title="Resume" sideBarActiveItemID="cv">
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Perfil</div>
+  </div>
+
+  <div class="mb-10 text-justify">
+    Soy una persona apasionada por la tecnología, con habilidades en sistemas
+    operativos, desarrollo de software y desarrollo web. Además de habilidades
+    en diseño e ilustración. Me considero creativo y resolutivo, siempre
+    dispuesto a aprender de forma autodidacta y adaptarme con facilidad a
+    diferentes proyectos. Mi objetivo actual es obtener una oportunidad laboral
+    donde pueda adquirir experiencia práctica y seguir desarrollándome
+    profesionalmente.
+  </div>
+
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Educación</div>
+  </div>
+
+  <div class="time-line-container grid gap-4 mb-10">
+    <TimeLineElement
+      title="Ingeniería en Informática"
+      subtitle="2022 hasta Actualidad en Universidad Estatal a Distancia (UNED), San José, Costa Rica"
+    />
+    <TimeLineElement
+      title="Ingeniería en Computadores"
+      subtitle="2020 hasta 2022 en Instituto Tecnologico de Costa Rica, Cartago, Costa Rica"
+    />
+  </div>
+
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Experiencia</div>
+  </div>
+
+  <div class="time-line-container mb-10">
+    <TimeLineElement
+      title="Desarrollador web independiente"
+      subtitle="Desde 2023 hasta la actualidad, Costa Rica"
+    >
+      Comenze a desempeñarme como desarrollador web independiente para mejorar
+      mis habilidades y conocimientos en diseño y programacion de sitios web.
+      Utilizo NextJS y Astro para el Frontend y servicios como Firebase,
+      Supabase o Appwrite para el backend y autenticacciones.
+    </TimeLineElement>
+    <TimeLineElement
+      title="Desarrollador junior"
+      subtitle="En Febrero-Marzo de 2021 en Jivis, San Jose, Costa Rica"
+    >
+      Se me encargo el diseño y desarrollo de una aplicacion sencilla de bajo
+      presupuesto para llevar un control de los empleados de la compañia. Esto
+      para agilizar el control de cuantos dias de vacaciones tendria cada
+      empleado en base a los dias libres que solicitaba o los dias extra que
+      trabajaba. Este fue mi primer proyecto de programación cuando empezaba la
+      carrera.
+    </TimeLineElement>
+    <!-- <TimeLineElement
+      title="Job Title at Project or Company Name"
+      subtitle="From [Start Date] to [End Date] at [Company], [City], [Country]"
+    >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+      cupidatat non proident.
+    </TimeLineElement> -->
+  </div>
+
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Certificados</div>
+  </div>
+
+  <ul class="list-disc mx-6 mb-10 grid gap-2">
+    <li>
+      <a
+        href="https://platzi.com/p/MarcoA16B/curso/2477-frontend-developer-practico/diploma/detalle/"
+        target="_blank"
+      >
+        Curso practico de Frontend Developer</a
+      >
+    </li>
+    <li>
+      <a
+        href="https://platzi.com/p/MarcoA16B/curso/2008-html-css/diploma/detalle/"
+        target="_blank"
+      >
+        Curso definitivo de HTML y CSS</a
+      >
+    </li>
+    <li>
+      <a
+        href="https://platzi.com/p/MarcoA16B/curso/1744-practico-css/diploma/detalle/"
+        target="_blank"
+      >
+        Curso Práctico de Maquetación en CSS</a
+      >
+    </li>
+    <li>
+      <a
+        href="https://platzi.com/p/MarcoA16B/curso/1098-ingenieria/diploma/detalle/"
+        target="_blank"
+      >
+        Fundamentos de Ingeniería de Software</a
+      >
+    </li>
+    <li>
+      <a
+        href="https://platzi.com/p/MarcoA16B/curso/1814-basico-javascript/diploma/detalle/"
+        target="_blank"
+      >
+        Curso Básico de JavaScript</a
+      >
+    </li>
+    <li>
+      <a
+        href="https://platzi.com/p/MarcoA16B/curso/2327-javascript-practico-2021/diploma/detalle/"
+        target="_blank"
+      >
+        Curso Práctico de JavaScript</a
+      >
+    </li>
+    <li>
+      <a
+        href="https://platzi.com/p/MarcoA16B/curso/2030-mobile-first/diploma/detalle/"
+        target="_blank"
+      >
+        Curso de Responsive Design: Maquetación Mobile First</a
+      >
+    </li>
+    <li>
+      <a
+        href="https://platzi.com/p/MarcoA16B/curso/2242-webpack/diploma/detalle/"
+        target="_blank"
+      >
+        Curso de Webpack</a
+      >
+    </li>
+    <li>
+      <a
+        href="https://platzi.com/p/MarcoA16B/curso/2444-react-17/diploma/detalle/"
+        target="_blank"
+      >
+        Curso de React 17</a
+      >
+    </li>
+    <li>
+      <a
+        href="https://platzi.com/p/MarcoA16B/curso/2484-react-webpack-sass/diploma/detalle/"
+        target="_blank"
+      >
+        Curso de React 17 con Webpack 5 y Sass</a
+      >
+    </li>
+    <li>
+      <a
+        href="https://platzi.com/p/MarcoA16B/curso/1815-ecmascript/diploma/detalle/"
+        target="_blank"
+      >
+        Curso de ECMAScript 6+</a
+      >
+    </li>
+    <li>
+      <a
+        href="https://platzi.com/p/MarcoA16B/curso/1789-asincronismo-js-old/diploma/detalle/"
+        target="_blank"
+      >
+        Curso de Asincronismo con JavaScript 2019</a
+      >
+    </li>
+    <li>
+      <a
+        href="https://platzi.com/p/MarcoA16B/curso/2457-react-patrones-render/diploma/detalle/"
+        target="_blank"
+      >
+        Curso de React.js: Patrones de Render y Composición</a
+      >
+    </li>
+    <li>
+      <a
+        href="https://platzi.com/p/MarcoA16B/curso/1991-next/diploma/detalle/"
+        target="_blank"
+      >
+        Curso de Next.js</a
+      >
+    </li>
+    <li>
+      <a
+        href="https://platzi.com/p/MarcoA16B/curso/2292-terminal/diploma/detalle/"
+        target="_blank"
+      >
+        Curso de Introducción a la Terminal y Línea de Comandos</a
+      >
+    </li>
+    <li>
+      <a
+        href="https://platzi.com/p/MarcoA16B/curso/2508-backend-introduccion/diploma/detalle/"
+        target="_blank"
+      >
+        Curso de Introducción al Desarrollo Backend</a
+      >
+    </li>
+    <li>
+      <a
+        href="https://platzi.com/p/MarcoA16B/curso/2200-introduccion-azure/diploma/detalle/"
+        target="_blank"
+      >
+        Curso de Introducción a la Nube con Azure</a
+      >
+    </li>
+    <li>
+      <a
+        href="https://platzi.com/p/MarcoA16B/curso/1937-python-basico/diploma/detalle/"
+        target="_blank"
+      >
+        Curso Básico de Python</a
+      >
+    </li>
+    <li>
+      <a href="#" target="_blank"> Curso definitivo de HTML y CSS</a>
+    </li>
+  </ul>
+
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Skills</div>
+  </div>
+
+  <ul class="list-disc md:columns-5 columns-2 mx-6">
+    <li>HTML/CSS</li>
+    <li>JavaScript</li>
+    <li>React.js</li>
+    <li>Next.js</li>
+    <li>Astro.js</li>
+    <li>Node.js</li>
+    <li>Git/Github</li>
+    <li>JavaScript</li>
+    <li>TypeScript</li>
+    <li>APIs</li>
+    <li>MongoDB</li>
+    <li>Firebase</li>
+    <li>Appwrite</li>
+    <li>Supabase</li>
+    <li>Python</li>
+    <li>Java</li>
+    <li>C++</li>
+    <li>Dart</li>
+    <li>Linux</li>
+    <li>Figma</li>
+  </ul>
+</BaseLayout>
