@@ -1,12 +1,6 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import dayjs from "dayjs";
-import localizedFormat from "dayjs/plugin/localizedFormat";
-
-dayjs.extend(localizedFormat);
-
 const { frontmatter } = Astro.props;
-const displayDate = dayjs(frontmatter.pubDate).format("ll");
 ---
 
 <BaseLayout
@@ -26,7 +20,7 @@ const displayDate = dayjs(frontmatter.pubDate).format("ll");
         )
       }
       <h1 class="title my-2 text-4xl font-bold">{frontmatter.title}</h1>
-      {frontmatter.pubDate && <time>{displayDate}</time>}
+      {frontmatter.pubDate && <p>{frontmatter.pubDate}</p>}
       <br />
       {
         frontmatter.badge && (
