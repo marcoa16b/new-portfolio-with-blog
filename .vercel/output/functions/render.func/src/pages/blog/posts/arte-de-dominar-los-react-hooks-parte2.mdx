@@ -1,0 +1,547 @@
+---
+layout: ../../../layouts/PostLayout.astro
+title: "El arte de dominar los React Hooks. Parte 2"
+description: "Descubre la importancia de dominar los React Hooks y aprende a utilizarlos correctamente para mejorar el desarrollo de tus aplicaciones. Parte 2."
+pubDate: "Jul 03 2023"
+heroImage: "/images/blog/react-hooks.png"
+badge: "New post"
+---
+
+# El arte de dominar los React Hooks: descubriendo su importancia y dominando su uso correcto. Parte 2
+
+En el emocionante mundo de la programación con React, los Hooks son como pinceles mágicos que nos permiten crear componentes más eficientes y elegantes. Este post es la continuacion de un articulo anterior por lo que si no lo has visto te recomiento que lo hagas siguiendo [este enlace](https://blog.nandev.xyz/arte-de-dominar-los-react-hooks-parte1) y luego regreses aquí.
+
+## Ejemplos básicos de uso de React Hooks
+
+En esta sección, exploraremos algunos ejemplos básicos de cómo utilizar los React Hooks en tus componentes funcionales de React. Estos ejemplos te ayudarán a comprender mejor cómo aprovechar al máximo los Hooks en tus proyectos.
+
+## Contador: useState y useEffect
+
+Comencemos con algo sencillo pero práctico: un contador. Imagina que estás construyendo una aplicación y necesitas incorporar un contador que aumente cada vez que se hace clic en un botón. Con los React Hooks, esto es muy fácil de lograr.
+
+Usaremos dos Hooks en este ejemplo: `useState` y `useEffect`. `useState` nos permitirá definir y actualizar el estado del contador, mientras que `useEffect` nos permitirá ejecutar un efecto cada vez que el valor del contador cambie.
+
+Aquí tienes un código de ejemplo:
+
+```jsx
+import React, { useState, useEffect } from "react";
+
+function Contador() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    console.log("El contador ha cambiado:", count);
+  }, [count]);
+
+  return (
+    <div>
+      <p>Contador: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Incrementar</button>
+    </div>
+  );
+}
+
+export default Contador;
+```
+
+Como puedes ver, hemos utilizado `useState` para definir `count` y `setCount`, que representan el estado del contador y una función para actualizarlo, respectivamente. Luego, en el efecto de `useEffect`, simplemente mostramos en la consola cada vez que el valor del contador cambie.
+
+## Formulario controlado: useState y useRef
+
+Otro caso común en el desarrollo de aplicaciones es trabajar con formularios. A menudo, es necesario capturar y gestionar los datos ingresados por el usuario en tiempo real. Con los React Hooks, podemos hacer esto de manera muy sencilla utilizando `useState` y `useRef`.
+
+En este ejemplo, crearemos un formulario controlado donde el valor ingresado en un campo de texto se mostrará en tiempo real.
+
+Aquí tienes el código de ejemplo:
+
+```jsx
+import React, { useState, useRef } from "react";
+
+function FormularioControlado() {
+  const [inputValue, setInputValue] = useState("");
+  const inputRef = useRef(null);
+
+  const handleChange = () => {
+    setInputValue(inputRef.current.value);
+  };
+
+  return (
+    <div>
+      <input
+        type="text"
+        ref={inputRef}
+        value={inputValue}
+        onChange={handleChange}
+      />
+      <p>Texto ingresado: {inputValue}</p>
+    </div>
+  );
+}
+
+export default FormularioControlado;
+```
+
+En este caso, hemos utilizado `useState` para definir `inputValue` y `setInputValue`, que representan el estado del valor ingresado en el campo de texto y una función para actualizarlo, respectivamente. También hemos utilizado `useRef` para obtener una referencia al elemento de entrada de texto y capturar su valor en el evento `onChange`.
+
+## Tema de la aplicación: useState y useContext
+
+En aplicaciones más grandes, a menudo es necesario manejar un tema global que afecte el estilo y la apariencia de la interfaz de usuario. Con el Hook `useContext`, podemos acceder y utilizar fácilmente el tema en diferentes componentes de nuestra aplicación.
+
+Aquí tienes un ejemplo básico de cómo usar `useState` y `useContext` para implementar un tema en toda la aplicación:
+
+```jsx
+import React, { useState, useContext } from "react";
+
+const ThemeContext = React.createContext();
+
+function TemaDeAplicacion() {
+  const [theme, setTheme] = useState("light");
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
+
+  return (
+    <ThemeContext.Provider value={theme}>
+      <div>
+        <button onClick={toggleTheme}>Cambiar tema</button>
+        <Componente1 />
+        <Componente2 />
+      </div>
+    </ThemeContext.Provider>
+  );
+}
+
+function Componente1() {
+  const theme = useContext(ThemeContext);
+
+  return <p>Componente 1 - Tema actual: {theme}</p>;
+}
+
+function Componente2() {
+  const theme = useContext(ThemeContext);
+
+  return <p>Componente 2 - Tema actual: {theme}</p>;
+}
+
+export default TemaDeAplicacion;
+```
+
+En este ejemplo, hemos creado un contexto de tema utilizando `React.createContext()` y lo hemos envuelto alrededor de los componentes `Componente1` y `Componente2` utilizando `ThemeContext.Provider`. Luego, en cada componente, utilizamos `useContext(ThemeContext)` para acceder al tema actual y mostrarlo en la interfaz de usuario.
+
+## Ejemplos intermedios de uso de React Hooks
+
+En esta sección, vamos a explorar algunos ejemplos intermedios de cómo utilizar los React Hooks en tus componentes funcionales de React. Estos ejemplos te permitirán profundizar en el uso de los Hooks y aplicarlos a situaciones más complejas en tus proyectos.
+
+## Lista filtrada: useState, useEffect y useMemo
+
+Imagina que estás construyendo una aplicación de búsqueda y tienes una lista de elementos que deseas filtrar en base a un criterio. Con los React Hooks, podemos crear una lista filtrada de manera eficiente utilizando `useState`, `useEffect` y `useMemo`.
+
+Aquí tienes un ejemplo de cómo implementar una lista filtrada:
+
+```jsx
+import React, { useState, useEffect, useMemo } from "react";
+
+function ListaFiltrada() {
+  const [data, setData] = useState([]);
+  const [filter, setFilter] = useState("");
+
+  useEffect(() => {
+    // Aquí puedes realizar una llamada a una API o cargar los datos de otra manera
+    // Para simplificar, supongamos que ya tenemos los datos disponibles
+    const fetchData = async () => {
+      // Simulamos una llamada a una API con un retardo de 1 segundo
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const response = ["Manzana", "Banana", "Cereza", "Durazno", "Uva"];
+      setData(response);
+    };
+
+    fetchData();
+  }, []);
+
+  const filteredData = useMemo(() => {
+    return data.filter((item) =>
+      item.toLowerCase().includes(filter.toLowerCase())
+    );
+  }, [data, filter]);
+
+  const handleChangeFilter = (e) => {
+    setFilter(e.target.value);
+  };
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={filter}
+        onChange={handleChangeFilter}
+        placeholder="Filtrar lista"
+      />
+      <ul>
+        {filteredData.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default ListaFiltrada;
+```
+
+En este ejemplo, hemos utilizado `useState` para manejar el estado de los datos (`data`) y el filtro (`filter`). Mediante `useEffect`, simulamos una llamada a una API y cargamos los datos una vez al cargar el componente. Luego, utilizamos `useMemo` para calcular la lista filtrada (`filteredData`) en función del estado del filtro y los datos originales. Esto mejora el rendimiento al evitar recálculos innecesarios cuando el filtro no cambia.
+
+## Carrusel de imágenes: useState, useEffect y useRef
+
+Un carrusel de imágenes es una funcionalidad común en muchas aplicaciones. Puede ser utilizado para mostrar una serie de imágenes de manera interactiva. Podemos implementar un carrusel utilizando los React Hooks, incluyendo `useState`, `useEffect` y `useRef`.
+
+Aquí tienes un ejemplo de cómo crear un carrusel de imágenes básico:
+
+```jsx
+import React, { useState, useEffect, useRef } from "react";
+
+function CarruselImagenes() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const images = ["imagen1.jpg", "imagen2.jpg", "imagen3.jpg", "imagen4.jpg"];
+  const timeoutRef = useRef(null);
+
+  useEffect(() => {
+    timeoutRef.current = setTimeout(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 3000);
+
+    return () => {
+      clearTimeout(timeoutRef.current);
+    };
+  }, [currentIndex, images.length]);
+
+  return (
+    <div>
+      <img src={images[currentIndex]} alt="Imagen del carrusel" />
+    </div>
+  );
+}
+
+export default CarruselImagenes;
+```
+
+En este ejemplo, utilizamos `useState` para manejar el estado del índice actual (`currentIndex`) y `useEffect` para cambiar el índice cada 3 segundos y mostrar la siguiente imagen del carrusel. Utilizamos `useRef` para mantener una referencia al timeout y limpiarlo cuando el componente se desmonte, evitando fugas de memoria.
+
+## Drag and Drop: useState, useEffect, useRef y useReducer
+
+Implementar funcionalidades de arrastrar y soltar (Drag and Drop) es un desafío común en el desarrollo de aplicaciones interactivas. Podemos utilizar una combinación de los React Hooks `useState`, `useEffect`, `useRef` y `useReducer` para lograrlo.
+
+Aquí tienes un ejemplo básico de cómo crear una funcionalidad de arrastrar y soltar:
+
+```jsx
+import React, { useState, useEffect, useRef, useReducer } from "react";
+
+function DragAndDrop() {
+  const [dragging, setDragging] = useState(false);
+  const dragItem = useRef();
+  const container = useRef();
+
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "SET_ITEMS":
+        return action.payload;
+      case "MOVE_ITEM":
+        const { dragIndex, hoverIndex } = action.payload;
+        const dragItem = state[dragIndex];
+        const newState = [...state];
+        newState.splice(dragIndex, 1);
+        newState.splice(hoverIndex, 0, dragItem);
+        return newState;
+      default:
+        return state;
+    }
+  };
+
+  const [items, dispatch] = useReducer(reducer, [
+    "Item 1",
+    "Item 2",
+    "Item 3",
+    "Item 4",
+  ]);
+
+  const handleDragStart = (e, index) => {
+    setDragging(true);
+    dragItem.current = index;
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/html", e.target.parentNode);
+    e.dataTransfer.setDragImage(e.target.parentNode, 20, 20);
+  };
+
+  const handleDragEnter = (e, index) => {
+    if (dragItem.current !== index) {
+      dispatch({
+        type: "MOVE_ITEM",
+        payload: { dragIndex: dragItem.current, hoverIndex: index },
+      });
+      dragItem.current = index;
+    }
+  };
+
+  const handleDragEnd = () => {
+    setDragging(false);
+  };
+
+  useEffect(() => {
+    dispatch({ type: "SET_ITEMS", payload: items });
+  }, [items]);
+
+  return (
+    <div ref={container}>
+      {items.map((item, index) => (
+        <div
+          key={index}
+          draggable
+          onDragStart={(e) => handleDragStart(e, index)}
+          onDragEnter={(e) => handleDragEnter(e, index)}
+          onDragEnd={handleDragEnd}
+          style={{ opacity: dragging ? 0.5 : 1 }}
+        >
+          {item}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default DragAndDrop;
+```
+
+En este ejemplo, utilizamos `useState` para manejar el estado de `dragging`, que indica si el elemento está siendo arrastrado o no. Utilizamos `useRef` para mantener una referencia al elemento que se está arrastrando (`dragItem`) y al contenedor (`container`).
+
+Además, utilizamos `useReducer` para manejar el estado de los elementos y actualizar su posición cuando se arrastran y sueltan. Mediante `useEffect`, actualizamos el estado de los elementos cada vez que cambia.
+
+Estos ejemplos intermedios te ayudarán a comprender mejor cómo aplicar los React Hooks en situaciones más complejas en tus proyectos.
+
+## Ejemplos avanzados de uso de React Hooks
+
+En esta sección, vamos a explorar algunos ejemplos avanzados de cómo utilizar los React Hooks en tus componentes funcionales de React. Estos ejemplos te permitirán abordar casos más complejos y avanzados en tus proyectos.
+
+## Autenticación: useState, useEffect, useContext y useReducer
+
+La autenticación es un aspecto crucial en muchas aplicaciones web. Podemos utilizar una combinación de los React Hooks `useState`, `useEffect`, `useContext` y `useReducer` para implementar un sistema de autenticación en nuestra aplicación.
+
+Aquí tienes un ejemplo básico de cómo manejar la autenticación utilizando los Hooks:
+
+```jsx
+import React, { useState, useEffect, useContext, useReducer } from "react";
+
+const AuthContext = React.createContext();
+
+function authReducer(state, action) {
+  switch (action.type) {
+    case "LOGIN":
+      return { ...state, isAuthenticated: true };
+    case "LOGOUT":
+      return { ...state, isAuthenticated: false };
+    default:
+      return state;
+  }
+}
+
+function AuthProvider({ children }) {
+  const [state, dispatch] = useReducer(authReducer, { isAuthenticated: false });
+
+  useEffect(() => {
+    // Lógica para comprobar el estado de autenticación (por ejemplo, verificar el token)
+
+    // Simulamos un retardo de 1 segundo para mostrar el ejemplo
+    const checkAuthStatus = setTimeout(() => {
+      const isAuthenticated = Math.random() < 0.5; // Simulamos un estado de autenticación aleatorio
+      isAuthenticated
+        ? dispatch({ type: "LOGIN" })
+        : dispatch({ type: "LOGOUT" });
+    }, 1000);
+
+    return () => clearTimeout(checkAuthStatus);
+  }, []);
+
+  return <AuthContext.Provider value={state}>{children}</AuthContext.Provider>;
+}
+
+function LoginPage() {
+  const { isAuthenticated } = useContext(AuthContext);
+
+  const handleLogin = () => {
+    // Lógica de inicio de sesión (por ejemplo, enviar credenciales al servidor)
+    // Simulamos un retardo de 1 segundo para mostrar el ejemplo
+    setTimeout(() => {
+      dispatch({ type: "LOGIN" });
+    }, 1000);
+  };
+
+  const handleLogout = () => {
+    // Lógica de cierre de sesión (por ejemplo, eliminar token)
+    // Simulamos un retardo de 1 segundo para mostrar el ejemplo
+    setTimeout(() => {
+      dispatch({ type: "LOGOUT" });
+    }, 1000);
+  };
+
+  return (
+    <div>
+      {isAuthenticated ? (
+        <button onClick={handleLogout}>Cerrar sesión</button>
+      ) : (
+        <button onClick={handleLogin}>Iniciar sesión</button>
+      )}
+    </div>
+  );
+}
+
+export default AuthProvider;
+```
+
+En este ejemplo, utilizamos `useReducer` para manejar el estado de autenticación y actualizarlo mediante acciones como "LOGIN" y "LOGOUT". Utilizamos `useEffect` para simular la verificación del estado de autenticación, y actualizamos el estado en consecuencia. Luego, utilizando `useContext`, accedemos al estado de autenticación en el componente `LoginPage` y mostramos los botones correspondientes según el estado actual.
+
+## Gestión del estado global: useState, useEffect, useContext y useReducer
+
+En aplicaciones más grandes, a menudo necesitamos compartir y gestionar el estado global entre múltiples componentes. Podemos utilizar los React Hooks `useState`, `useEffect`, `useContext` y `useReducer` para implementar una gestión del estado global eficiente.
+
+Aquí tienes un ejemplo básico de cómo gestionar el estado global utilizando los Hooks:
+
+```jsx
+import React, { useState, useEffect, useContext, useReducer } from "react";
+
+const GlobalStateContext = React.createContext();
+const GlobalDispatchContext = React.createContext();
+
+const initialState = {
+  counter: 0,
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "INCREMENT":
+      return { ...state, counter: state.counter + 1 };
+    case "DECREMENT":
+      return { ...state, counter: state.counter - 1 };
+    default:
+      throw new Error(`Unhandled action type: ${action.type}`);
+  }
+}
+
+function GlobalProvider({ children }) {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    // Lógica adicional o efectos secundarios relacionados con el estado global
+
+    // Por ejemplo, podemos utilizar un efecto para guardar el estado en el almacenamiento local
+    localStorage.setItem("globalState", JSON.stringify(state));
+  }, [state]);
+
+  return (
+    <GlobalStateContext.Provider value={state}>
+      <GlobalDispatchContext.Provider value={dispatch}>
+        {children}
+      </GlobalDispatchContext.Provider>
+    </GlobalStateContext.Provider>
+  );
+}
+
+function ComponentA() {
+  const state = useContext(GlobalStateContext);
+  const dispatch = useContext(GlobalDispatchContext);
+
+  const handleIncrement = () => {
+    dispatch({ type: "INCREMENT" });
+  };
+
+  const handleDecrement = () => {
+    dispatch({ type: "DECREMENT" });
+  };
+
+  return (
+    <div>
+      <h2>Component A</h2>
+      <p>Counter: {state.counter}</p>
+      <button onClick={handleIncrement}>Increment</button>
+      <button onClick={handleDecrement}>Decrement</button>
+    </div>
+  );
+}
+
+function ComponentB() {
+  const state = useContext(GlobalStateContext);
+
+  return (
+    <div>
+      <h2>Component B</h2>
+      <p>Counter: {state.counter}</p>
+    </div>
+  );
+}
+
+export default GlobalProvider;
+```
+
+En este ejemplo, utilizamos `useReducer` para gestionar el estado global y actualizarlo mediante acciones como "INCREMENT" y "DECREMENT". Utilizamos `useEffect` para realizar lógica adicional relacionada con el estado global, como guardar el estado en el almacenamiento local.
+
+Luego, utilizando `useContext`, accedemos al estado global y al despachador de acciones en los componentes `ComponentA` y `ComponentB`. Esto nos permite mostrar y actualizar el estado global en diferentes componentes de la aplicación.
+
+## Animaciones avanzadas: useState, useEffect, useRef y useReducer
+
+Las animaciones son una parte importante de las aplicaciones interactivas. Podemos utilizar una combinación de los React Hooks `useState`, `useEffect`, `useRef` y `useReducer` para crear animaciones avanzadas en nuestros componentes.
+
+Aquí tienes un ejemplo básico de cómo implementar animaciones avanzadas utilizando los Hooks:
+
+```jsx
+import React, { useState, useEffect, useRef, useReducer } from "react";
+
+const initialState = {
+  position: 0,
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "MOVE_LEFT":
+      return { ...state, position: state.position - 100 };
+    case "MOVE_RIGHT":
+      return { ...state, position: state.position + 100 };
+    default:
+      return state;
+  }
+}
+
+function Carousel() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const carouselRef = useRef(null);
+
+  useEffect(() => {
+    carouselRef.current.style.transform = `translateX(${state.position}px)`;
+  }, [state.position]);
+
+  const handleMoveLeft = () => {
+    dispatch({ type: "MOVE_LEFT" });
+  };
+
+  const handleMoveRight = () => {
+    dispatch({ type: "MOVE_RIGHT" });
+  };
+
+  return (
+    <div className="carousel-container">
+      <div className="carousel" ref={carouselRef}>
+        {/* Contenido del carrusel */}
+      </div>
+      <button onClick={handleMoveLeft}>Move Left</button>
+      <button onClick={handleMoveRight}>Move Right</button>
+    </div>
+  );
+}
+
+export default Carousel;
+```
+
+En este ejemplo, utilizamos `useReducer` para manejar el estado de la posición del carrusel y actualizarlo mediante acciones como "MOVE_LEFT" y "MOVE_RIGHT". Utilizamos `useRef` para obtener una referencia al elemento del carrusel y luego aplicar transformaciones CSS para mover el carrusel según la posición actual.
+
+Mediante `useEffect`, actualizamos el estilo del carrusel cada vez que cambia la posición, lo que crea una animación fluida.
+
+Estos ejemplos avanzados te brindan una idea de cómo utilizar los React Hooks para implementar funcionalidades más complejas en tus aplicaciones. Recuerda experimentar y adaptar estos ejemplos según tus necesidades específicas. ¡Disfruta explorando los límites de los Hooks en tus proyectos!
